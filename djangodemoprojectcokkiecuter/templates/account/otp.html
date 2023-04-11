@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<div class="main">
+		<div class="login">
+			<form method="POST" action="{% url 'otp' %}">
+        {% csrf_token %}
+				<label for="chk" aria-hidden="true">Login</label>
+				<input type="text" name="phone_otp" placeholder="phone_otp" required="">
+        <button name="sign-in">Login</button>
+			</form>
+		</div>
+</div>
+<!-- This template is copied from -> https://codepen.io/mamislimen/pen/jOwwLvy -->
+{% endblock %}

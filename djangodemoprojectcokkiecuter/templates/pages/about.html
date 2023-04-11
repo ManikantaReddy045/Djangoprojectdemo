@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+{% if request.user.is_authenticated %}
+User is {{request.user.username}}
+{% else %}
+You are not logged in!
+{% endif %}
+
+{% endblock %}

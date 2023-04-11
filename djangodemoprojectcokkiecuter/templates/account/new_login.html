@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<p>
+  If you have not created an account with mobile number, then please
+  <a href="{% url 'regiser_here' %}">sign up</a> first.
+</p>
+  <form method="post" enctype="multipart/form-data" nonvalidate>
+    {% csrf_token %}
+    <div>
+      <p> Register Here <p>
+      </div>
+    {{ form|crispy }}
+
+    <button type="submit" class="btn btn-primary">submit</button>
+  </form>
+{% endblock %}

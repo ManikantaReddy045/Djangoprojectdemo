@@ -1,0 +1,29 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% translate "Signup" %}{% endblock %}
+
+{% block inner %}
+<h1>{% translate "Sign Up" %}</h1>
+{% comment %} <p>
+
+  If you forgot your password please use this link for otp based login
+  <a href="{% url 'otp_login' %}">Log in</a>.
+</p>
+
+<p>
+  If you have not created an account with mobile number, then please
+  <a href="{% url 'regiser_here' %}">Register Here</a> first.
+</p> {% endcomment %}
+
+<form class="signup" id="signup_form" method="post" action="{% url 'login_view' %}">
+  {% csrf_token %}
+
+  <br><input type="text" name="username" placeholder="username" required=""></br>
+  <br><input type="text" name="password" placeholder="password" required=""></br>
+  <br><button class="btn btn-primary" type="submit">{% translate "Sign Up" %} &raquo;</button></br>
+</form>
+
+{% endblock %}
