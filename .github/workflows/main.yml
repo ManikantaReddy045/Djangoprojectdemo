@@ -26,14 +26,6 @@ jobs:
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - uses: actions/checkout@v2.4.0
-      - name: Run migrations
+      - name: Run tests
         run: |
-          docker-compose -f local.yml run --rm django python manage.py makemigrations
-          docker-compose -f local.yml run --rm django python manage.py migrate
-          docker-compose -f local.yml run --rm django python manage.py check
-      - name: Build the images and start the containers
-        run: |
-          docker-compose -f local.yml up --build
-      - name: Stop containers
-        if: always()
-        run: docker-compose -f local.yml down
+          docker-compose -f local.yml run --rm django pytest
