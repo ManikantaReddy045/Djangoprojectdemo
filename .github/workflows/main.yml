@@ -26,6 +26,18 @@ jobs:
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - uses: actions/checkout@v2.4.0
+      - name: Run migrations
+        run: |
+          # export DATABASE_URL=postgres://${{ matrix.database-user }}:${{ matrix.database-password }}@${{ matrix.database-host }}:${{ matrix.database-port }}/${{ matrix.database-name }}
+          export SECRET_KEY=test-secret-key
+          export DEBUG=1
+          export ALLOWED_HOSTS=localhost
+          export GITHUB_WORKFLOW=True
+          export MODE=workflow
+          docker-compose -f local.yml makemigrations
+          docker-compose -f local.yml migrate
+          # python manage.py migrate --run-syncdb
+          docker-compose -f local.yml check
       - name: Build the images and start the containers
         run: |
           docker-compose -f local.yml build
@@ -33,4 +45,4 @@ jobs:
           # run: docker-compose up -d --build
       - name: Stop containers
         if: always()
-        run: docker-compose -f local.yml run "docker-compose -f local.yml run" down
+        run: docker-compose -f local.yml "docker-compose -f local.yml" down
