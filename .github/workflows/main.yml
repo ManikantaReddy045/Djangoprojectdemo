@@ -28,8 +28,6 @@ jobs:
       - uses: actions/checkout@v2.4.0
       - name: Build the images and start the containers
         run: |
-          export GITHUB_WORKFLOW=True
-          export MODE="Test"
           docker-compose -f local.yml run build
           docker-compose -f local.yml up -d
           # run: docker-compose up -d --build
