@@ -33,8 +33,7 @@ jobs:
           docker-compose -f local.yml run --rm django python manage.py check
       - name: Build the images and start the containers
         run: |
-          docker-compose -f local.yml build
-          docker-compose -f local.yml up -d
+          docker-compose -f local.yml up --build
       - name: Stop containers
         if: always()
-        run: docker-compose -f local.yml "docker-compose -f local.yml" down
+        run: docker-compose -f local.yml down
