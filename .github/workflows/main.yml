@@ -28,9 +28,9 @@ jobs:
       - uses: actions/checkout@v2.4.0
       - name: Run migrations
         run: |
-          docker-compose -f local.yml makemigrations
-          docker-compose -f local.yml migrate
-          docker-compose -f local.yml check
+          docker-compose -f local.yml run --rm django python manage.py makemigrations
+          docker-compose -f local.yml run --rm django python manage.py migrate
+          docker-compose -f local.yml run --rm django python manage.py check
       - name: Build the images and start the containers
         run: |
           docker-compose -f local.yml build
