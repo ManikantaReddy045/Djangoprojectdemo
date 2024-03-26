@@ -28,11 +28,6 @@ jobs:
       - uses: actions/checkout@v2.4.0
       - name: Run migrations
         run: |
-          export SECRET_KEY=test-secret-key
-          export DEBUG=1
-          export ALLOWED_HOSTS=localhost
-          export GITHUB_WORKFLOW=True
-          export MODE=workflow
           docker-compose -f local.yml makemigrations
           docker-compose -f local.yml migrate
           docker-compose -f local.yml check
@@ -40,7 +35,6 @@ jobs:
         run: |
           docker-compose -f local.yml build
           docker-compose -f local.yml up -d
-          # run: docker-compose up -d --build
       - name: Stop containers
         if: always()
         run: docker-compose -f local.yml "docker-compose -f local.yml" down
